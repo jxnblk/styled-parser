@@ -1,0 +1,23 @@
+{
+  "name": "styled-parser",
+  "version": "1.0.0-0",
+  "description": "Parse information from styled-components modules",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc ava"
+  },
+  "keywords": [],
+  "author": "Brent Jackson",
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^0.24.0",
+    "nyc": "^11.4.1"
+  },
+  "dependencies": {
+    "babel-generator": "^6.26.0",
+    "babel-traverse": "^6.26.0",
+    "babel-types": "^6.26.0",
+    "babylon": "^6.18.0",
+    "lodash.get": "^4.4.2"
+  }
+}
