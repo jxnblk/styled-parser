@@ -3,7 +3,7 @@ const traverse = require('babel-traverse').default
 const types = require('babel-types')
 const generate = require('babel-generator').default
 
-// how to do this with built in utils?
+// is there a good way to handle this with babel/ast utilities?
 const get = require('lodash.get')
 
 const parse = (code, opts = {}) => {
@@ -18,7 +18,7 @@ const parse = (code, opts = {}) => {
   let templateLiteral
   let defaultProps
 
-  const Visitor = {
+  const ImportsExports = {
     ImportDeclaration (path) {
       // get imports
       const specifiers = path.get('specifiers')
@@ -62,11 +62,9 @@ const parse = (code, opts = {}) => {
     },
   }
 
-  const Visit2 = {
+  const ComponentInfo = {
     TaggedTemplateExpression (path) {
-      // todo check if variable def === default Export
-      // handle call expressions?
-      // check if === styledComponentsVarName
+      // todo: check if variable def === default Export
 
       const obj = get(path, 'node.tag.object')
 
@@ -85,6 +83,7 @@ const parse = (code, opts = {}) => {
       templateLiteral = generate(quasi).code
         .replace(/^`|`$/g, '')
     },
+
     MemberExpression (path) {
       const obj = get(path, 'node.object.name')
       const prop = get(path, 'node.property.name')
@@ -99,13 +98,13 @@ const parse = (code, opts = {}) => {
     }
   }
 
-  traverse(ast, Visitor)
-  traverse(ast, Visit2)
+  traverse(ast, ImportsExports)
+  traverse(ast, ComponentInfo)
 
   return {
     name: defaultExport,
     type,
-    templateLiteral,
+    style: templateLiteral,
     defaultProps,
     styledComponentsVarName,
     imports,

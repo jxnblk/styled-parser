@@ -1,15 +1,6 @@
 import test from 'ava'
 import parse from './index'
 
-import util from 'util'
-
-// import { space, color } from 'styled-system'
-const fix = `import styled from 'styled-components'
-const Box = styled.div\`
-  background-color: tomato;
-\`
-`
-
 const fixture = `import styled from 'styled-components'
 import { space, color } from 'styled-system'
 import * as sys from 'styled-system'
@@ -33,7 +24,6 @@ export default Box
 
 test('returns an object', t => {
   const res = parse(fixture)
-  // console.log( util.inspect(res, { depth: null }) )
   t.false(res === null)
   t.is(typeof res, 'object')
 })
@@ -75,7 +65,7 @@ test('parses defaultProps', t => {
 
 test('parses template literal', t => {
   const res = parse(fixture)
-  t.is(res.templateLiteral, `
+  t.is(res.style, `
   border: 1px solid #eee;
   border-radius: 4px;
   \${space}
