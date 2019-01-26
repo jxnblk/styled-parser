@@ -72,6 +72,7 @@ test('parses template literal', t => {
 `)
 })
 
+test.todo('parses propTypes')
 test.todo('handles styled function call syntax')
 test.todo('handles custom styled-components var names')
 test.todo('handles function call instead of tagged template literal syntax')

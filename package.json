@@ -4,7 +4,8 @@
   "description": "Parse information from styled-components modules",
   "main": "index.js",
   "scripts": {
-    "test": "nyc ava"
+    "test": "nyc ava",
+    "cover": "nyc report --reporter=html"
   },
   "keywords": [],
   "author": "Brent Jackson",
